@@ -13,7 +13,7 @@ http://gayhub.fun (ps.本人不是基佬)
 ![luola](./readme-image/luola.jpg)
 #### 政治敏感检测
 ![luola](./readme-image/jzm.jpg)
-#### 色情检测功能(原图并未打码，不想再GitHub教坏小朋友)
+#### 黄图检测功能(原图并未打码，不想再GitHub教坏小朋友)
 ![luola](./readme-image/porn.jpg)
 
 

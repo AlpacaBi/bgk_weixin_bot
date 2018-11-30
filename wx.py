@@ -21,6 +21,7 @@ import json
 
 
 
+
 from aip import AipImageCensor
 from aip import AipNlp
 APP_ID = '11685556'

@@ -22,12 +22,24 @@ import json
 
 
 from aip import AipImageCensor
-
+from aip import AipNlp
 APP_ID = '11685556'
 API_KEY = 'ELS0CGtNxbq15Gs0GGyP8xx8'
 SECRET_KEY = 'U5U5LHnsaDcErfguBOBTlGjR107i5hku'
-
 client = AipImageCensor(APP_ID, API_KEY, SECRET_KEY)
+
+
+
+
+
+""" 你的 APPID AK SK """
+APP_ID2 = '14895115'
+API_KEY2 = 'oxGumTKpYGZfxokP7iPayTKB'
+SECRET_KEY2 = 'UYlln10MWlrW3EVUH0wDYDn2TIKc9BmM'
+client2 = AipNlp(APP_ID2, API_KEY2, SECRET_KEY2)
+
+
+
 
 
 def get_file_content(filePath):
@@ -105,7 +117,7 @@ def get_params_all(img,app_id,app_key):                         #鉴权计算并
     params['sign']=md5text                  #将签名赋值到sign
     return  params                          #返回请求包
 
-bot = Bot()
+bot = Bot(cache_path=True)
 
 
 
@@ -115,7 +127,26 @@ tuling = Tuling(api_key='b55df5a8642c40058c9306eed9cef651')
 
 @bot.register([Friend])
 def reply_my_friend(msg):
-     tuling.do_reply(msg)
+    resm=client2.sentimentClassify(msg.text)
+    ressent=resm['items'][0]['sentiment']
+    respositive=resm['items'][0]['positive_prob']
+    ressentt=''
+    if ressent==2:
+        ressentt='情感偏正向\n'
+    elif ressent==1:
+        ressentt='情感偏中性\n'
+    else:
+        ressentt='情感偏负向\n'
+
+
+
+    respositive='情绪值：'+'{:.2f}%\n'.format(respositive*100)
+
+    lastres=ressentt+respositive
+
+
+    msg.reply(lastres)
+
 
 @bot.register([Group])
 def auto_reply(msg):
